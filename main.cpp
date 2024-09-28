@@ -1,19 +1,19 @@
 #include"Singly_LInk_List.h"
 
+
+//当链表需要频繁插入和删除时，可以增加一个变量记录长度，极大减少时间
 int main()
 {
 	int n, m;
 
 	std::cin >> n;
 
-	int a[100001];
+	int data;
 
-	for (int i = 0; i < n; i++)
-		std::cin >> a[i];
+	//输入再初始化过慢
+	Link_List<int> my_list;
 
-	Link_List<int> my_list(a, n);
-
-	LinkNode<int>* p = my_list.list->next;
+	LinkNode<int>* p = my_list.list;
 
 	/*for (int i = 0; i < my_list.getLength(); i++)
 	{
@@ -22,7 +22,17 @@ int main()
 	}
 
 	system("Pause");*/
+	my_list.length = n;
+	for (int i = 0; i < n; i++)
+	{
+		std::cin >> data;
 
+		LinkNode<int>* new_node = new LinkNode<int>(data);
+
+		p->next = new_node;
+
+		p = new_node;
+	}
 
 
 	std::cin >> m;
@@ -45,7 +55,7 @@ int main()
 		}
 
 
-		p = my_list.list->next;
+	/*	p = my_list.list->next;
 		for (int k = 0; k < my_list.getLength(); k++)
 		{
 			std::cout << p->data << " ";
@@ -54,7 +64,7 @@ int main()
 
 		std::cout << std::endl << my_list.getLength();
 
-		system("Pause");
+		system("Pause");*/
 	}
 
 	p = my_list.list->next;
@@ -64,7 +74,7 @@ int main()
 		p = p->next;
 	}
 
-	system("Pause");
+	/*system("Pause");*/
 
 
 }

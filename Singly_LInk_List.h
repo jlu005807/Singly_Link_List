@@ -26,6 +26,7 @@ class Link_List
 {
 public:
 	LinkNode<T>* list;
+	int length;
 
 	Link_List()
 	{
@@ -47,27 +48,12 @@ public:
 	//判空
 	bool IsEmpty()const
 	{
-		if (list->next == nullptr)
-		{
-			return true;
-		}
-		else return false;
+		return list->next == nullptr;
 	}
 
 	//求长度
 	int getLength()const
 	{
-		int length = 0;
-
-		LinkNode<T>* p = list->next;
-
-		//遍历到尾部
-		while (p != nullptr)
-		{
-			length++;
-			p = p->next;
-		}
-		
 		return length;
 	}
 
@@ -76,6 +62,8 @@ public:
 	{
 
 		LinkNode<T>* new_node = new LinkNode<T>(e);//此时new_node->next已经为nullptr
+
+		length++;
 
 		new_node->next = list->next;
 
@@ -108,12 +96,13 @@ public:
 			p->next = new_node;
 		}
 
+		length++;
 	}
 
 	//返回值判断是否成功插入 
 	bool Insert(T e,int pos)
 	{
-		if (pos<0 || pos>getLength())
+		if (pos<0 || pos>length)
 		{
 			return false;
 		}
@@ -131,6 +120,8 @@ public:
 
 		p->next = new_node;
 
+		length++;
+
 		return true;
 		
 
@@ -141,7 +132,7 @@ public:
 
 	bool Delete_Node(int pos = 1)//默认节点从一开始
 	{
-		if (pos<1 || pos>getLength())
+		if (pos<1 || pos>length)
 		{
 			return false;
 		}
@@ -160,6 +151,8 @@ public:
 
 		delete p;
 
+		length--;
+
 		return true;
 
 	}
@@ -171,6 +164,8 @@ private:
 		this->list = new LinkNode<T>();
 
 		list->next = nullptr;
+		
+		length = 0;
 	}
 
 	//以数组初始化链表
@@ -183,6 +178,8 @@ private:
 		for (int i = 0; i < n; i++)
 		{
 			LinkNode<T>* p = new LinkNode<T>(a[i]);
+
+			length++;
 
 			tail->next = p;
 			
@@ -202,6 +199,8 @@ private:
 			p = p->next;
 			delete q;
 		}
+
+		length = 0;
 
 	}
 
